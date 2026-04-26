@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Anaan Hassan — Medical Officer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Louize';
+            src: url('https://db.onlinewebfonts.com/t/d1fc77798b73d5813c3d5095ddd895a9.woff2') format('woff2'),
+                 url('https://db.onlinewebfonts.com/t/d1fc77798b73d5813c3d5095ddd895a9.woff') format('woff'),
+                 url('https://db.onlinewebfonts.com/t/d1fc77798b73d5813c3d5095ddd895a9.ttf') format('truetype');
+            font-weight: normal; font-style: normal; font-display: swap;
+        }
+
+        :root {
+            --bg: #f7f6f2;
+            --text: #1a1a18;
+            --text-2: #555550;
+            --text-3: #999990;
+            --accent: #1d4ed8;
+            --accent-light: rgba(29,78,216,0.08);
+            --rule: rgba(0,0,0,0.1);
+            --nav-bg: rgba(247,246,242,0.92);
+            --hero-bg: #0040ff;
+            --hero-nav-bg: rgba(255,255,255,0.12);
+            --hero-nav-border: rgba(255,255,255,0.2);
+            --contact-bg: #e8e6f4;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0e0e0c;
+            --text: #e8e8e2;
+            --text-2: #888882;
+            --text-3: #555550;
+            --accent: #5b8ef5;
+            --accent-light: rgba(91,142,245,0.1);
+            --rule: rgba(255,255,255,0.08);
+            --nav-bg: rgba(14,14,12,0.92);
+            --hero-bg: #001a80;
+            --hero-nav-bg: rgba(0,0,0,0.25);
+            --hero-nav-border: rgba(255,255,255,0.12);
+            --contact-bg: #1a1840;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.4s, color 0.3s;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* ── Nav ─────────────────────────────────── */
+        .nav {
+            position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%);
+            z-index: 100; display: flex; align-items: center; gap: 0.25rem;
+            background: var(--nav-bg); backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--rule); border-radius: 100px;
+            padding: 0.4rem 0.6rem;
+            transition: background 0.4s, border-color 0.3s; white-space: nowrap;
+        }
+
+        .nav-name {
+            font-family: 'Louize', Georgia, serif;
+            font-size: 0.9rem; color: var(--text);
+            padding: 0.4rem 0.75rem;
+        }
+
+        .nav-sep { width: 1px; height: 16px; background: var(--rule); margin: 0 0.125rem; }
+
+        .nav-links { display: flex; gap: 0.125rem; }
+
+        .nav-links a {
+            font-size: 0.82rem; color: var(--text-2);
+            padding: 0.45rem 0.8rem; border-radius: 100px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .nav-toggle {
+            width: 32px; height: 32px; border-radius: 50%;
+            border: 1px solid var(--rule); background: none; cursor: pointer;
+            color: var(--text-2); display: flex; align-items: center; justify-content: center;
+            transition: color 0.2s, border-color 0.2s; margin-left: 0.25rem; flex-shrink: 0;
+        }
+
+        .nav-toggle:hover { color: var(--accent); border-color: var(--accent); }
+        .nav-toggle svg { width: 14px; height: 14px; }
+
+        .nav-on-hero {
+            background: var(--hero-nav-bg) !important;
+            border-color: var(--hero-nav-border) !important;
+        }
+
+        .nav-on-hero .nav-name,
+        .nav-on-hero .nav-links a {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .nav-on-hero .nav-sep {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .nav-on-hero .nav-toggle {
+            color: rgba(255,255,255,0.75);
+            border-color: rgba(255,255,255,0.25);
+        }
+
+        .nav-on-hero .nav-toggle:hover {
+            color: white;
+            border-color: white;
+        }
+
+        .nav-on-hero .nav-links a:hover,
+        .nav-on-hero .nav-links a.active {
+            color: white;
+            background: rgba(255,255,255,0.15);
+        }
+        .icon-sun { display: none; }
+        [data-theme="dark"] .icon-sun { display: block; }
+        [data-theme="dark"] .icon-moon { display: none; }
+
+        .nav-hamburger {
+            display: none; background: none; border: none;
+            cursor: pointer; color: var(--text-2); padding: 0.4rem;
+        }
+
+        .mobile-menu {
+            display: none; position: fixed;
+            top: 5rem; left: 1rem; right: 1rem;
+            background: var(--nav-bg); backdrop-filter: blur(16px);
+            border: 1px solid var(--rule); border-radius: 16px;
+            padding: 0.75rem; z-index: 99;
+            flex-direction: column; gap: 0.25rem;
+        }
+
+        .mobile-menu.open { display: flex; }
+
+        .mobile-menu a {
+            font-size: 0.9rem; color: var(--text-2);
+            padding: 0.75rem 1rem; border-radius: 10px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .mobile-menu a:hover { color: var(--accent); background: var(--accent-light); }
+
+        /* ── Layout ──────────────────────────────── */
+        .page { max-width: 940px; margin: 0 auto; padding: 0 2.5rem; }
+        section { padding: 5rem 0; }
+        hr.rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
+
+        /* ── Hero ────────────────────────────────── */
+        .hero {
+            background: var(--hero-bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 8rem 0 0;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.4s;
+        }
+
+        .hero-inner {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 3rem;
+            align-items: flex-end;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.65);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 24px; height: 1px;
+            background: rgba(255,255,255,0.5);
+            flex-shrink: 0;
+        }
+
+        .hero-name {
+            font-family: 'Louize', Georgia, serif;
+            font-size: clamp(3.5rem, 7vw, 6rem);
+            font-weight: 400;
+            letter-spacing: -3px;
+            line-height: 0.95;
+            margin-bottom: 1.5rem;
+            color: white;
+            opacity: 0;
+            animation: fadeUp 0.7s ease 0.2s forwards;
+        }
+
+        .hero-tagline {
+            font-family: 'Louize', Georgia, serif;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 400;
+            color: rgba(255,255,255,0.75);
+            letter-spacing: -0.25px;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.7s ease 0.3s forwards;
+        }
+
+        .hero-tagline em { font-style: italic; color: rgba(255,255,255,0.95); }
+
+        .hero-bio {
+            font-size: 0.975rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.85;
+            max-width: 420px;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.7s ease 0.4s forwards;
+        }
+
+        .hero-actions {
+            display: flex; align-items: center; gap: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.7s ease 0.5s forwards;
+        }
+
+        .hero-cta-primary {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.875rem; font-weight: 500;
+            color: var(--hero-bg); background: white;
+            padding: 0.7rem 1.5rem; border-radius: 100px;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .hero-cta-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+        .hero-cta-primary svg { width: 14px; height: 14px; }
+
+        .hero-cta-secondary {
+            font-size: 0.875rem; color: rgba(255,255,255,0.7);
+            display: inline-flex; align-items: center; gap: 0.375rem;
+            transition: color 0.2s;
+        }
+        .hero-cta-secondary:hover { color: white; }
+        .hero-cta-secondary svg { width: 13px; height: 13px; }
+
+        /* Photo */
+        .hero-photo {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 540px;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.35s forwards;
+        }
+
+        .hero-photo-frame {
+            width: 320px;
+            height: 460px;
+            border-radius: 999px;
+            overflow: hidden;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+        }
+
+        .hero-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 5%;
+            display: block;
+        }
+
+        /* Scroll indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeUp 0.7s ease 0.8s forwards;
+        }
+
+        .scroll-hint-line {
+            width: 32px;
+            height: 1px;
+            background: rgba(255,255,255,0.4);
+            animation: scrollPulse 2s ease-in-out 1s infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { transform: scaleX(1); opacity: 1; }
+            50% { transform: scaleX(0.5); opacity: 0.4; }
+        }
+
+        /* ── Wave Divider ─────────────────────── */
+        .wave-divider {
+            display: block;
+            line-height: 0;
+            background: var(--hero-bg);
+            margin-top: -1px;
+            transition: background 0.4s;
+        }
+
+        .wave-divider svg {
+            display: block;
+            width: 100%;
+            height: 80px;
+        }
+
+        /* ── Section chrome ──────────────────────── */
+        .sec-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+
+        .sec-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+
+        .sec-num {
+            font-family: 'Louize', Georgia, serif;
+            font-size: 0.9rem;
+            color: var(--text-3);
+            letter-spacing: 0;
+        }
+
+        .sec-title {
+            font-family: 'Louize', Georgia, serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 3rem;
+        }
+
+        /* ── About ───────────────────────────────── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            color: var(--text-2);
+            line-height: 1.9;
+            margin-bottom: 1.25rem;
+        }
+
+        .about-meta {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .meta-row { display: flex; gap: 1.5rem; font-size: 0.875rem; }
+        .meta-label { color: var(--text-3); min-width: 52px; flex-shrink: 0; }
+        .meta-value a { color: var(--text); transition: color 0.2s; }
+        .meta-value a:hover { color: var(--accent); }
+
+        .about-stats { display: flex; flex-direction: column; }
+
+        .stat-row {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--rule);
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .stat-row:first-child { border-top: 1px solid var(--rule); }
+
+        .stat-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-desc { font-size: 0.875rem; color: var(--text-2); line-height: 1.5; }
+
+        /* ── Focus ───────────────────────────────── */
+        .focus-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .focus-item {
+            padding: 2.25rem 0;
+            border-bottom: 1px solid var(--rule);
+            display: grid;
+            grid-template-columns: 28px 1fr;
+            gap: 1.25rem;
+            align-items: start;
+            transition: background 0.25s;
+        }
+
+        .focus-item:nth-child(odd) { padding-right: 3rem; border-right: 1px solid var(--rule); }
+        .focus-item:nth-child(even) { padding-left: 3rem; }
+        .focus-item:first-child, .focus-item:nth-child(2) { border-top: 1px solid var(--rule); }
+
+        .focus-icon { color: var(--accent); margin-top: 1px; }
+        .focus-icon svg { width: 18px; height: 18px; stroke: currentColor; }
+
+        .focus-name {
+            font-size: 0.95rem; font-weight: 600; margin-bottom: 0.625rem;
+        }
+
+        .focus-items {
+            list-style: none; display: flex; flex-direction: column; gap: 0.3rem;
+        }
+
+        .focus-items li { font-size: 0.85rem; color: var(--text-2); }
+
+        /* ── Timeline ────────────────────────────── */
+        .timeline-list { display: flex; flex-direction: column; }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 2.5rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--rule);
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        .timeline-item:first-child { border-top: 1px solid var(--rule); }
+
+        /* Accent dot */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 137px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .timeline-item:hover::before { opacity: 1; }
+
+        .tl-date { font-size: 0.8rem; color: var(--text-3); padding-top: 0.25rem; }
+
+        .tl-role { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+
+        .tl-org { font-size: 0.875rem; color: var(--text-2); margin-bottom: 0.375rem; }
+
+        .tl-desc { font-size: 0.85rem; color: var(--text-3); line-height: 1.6; }
+
+        /* ── Publication ─────────────────────────── */
+        .pub-entry {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 2.5rem;
+            padding: 2.5rem 0;
+            border-top: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
+            transition: opacity 0.2s;
+        }
+
+        .pub-entry:hover { opacity: 0.7; }
+
+        .pub-year-col { font-size: 0.8rem; color: var(--text-3); padding-top: 0.2rem; }
+
+        .pub-journal {
+            font-size: 0.7rem; font-weight: 600; color: var(--accent);
+            text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.625rem;
+        }
+
+        .pub-title {
+            font-family: 'Louize', Georgia, serif;
+            font-size: 1.25rem; font-weight: 400;
+            color: var(--text); line-height: 1.5; margin-bottom: 1rem;
+        }
+
+        .pub-read {
+            font-size: 0.8rem; font-weight: 500; color: var(--accent);
+            display: inline-flex; align-items: center; gap: 0.375rem;
+        }
+
+        .pub-read svg { width: 12px; height: 12px; }
+
+        /* ── Projects ────────────────────────── */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .project-row {
+            display: flex;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--rule);
+            background: var(--bg);
+            transition: border-color 0.25s, box-shadow 0.25s;
+            text-decoration: none;
+            color: inherit;
+            position: sticky;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-row:nth-child(1) { top: 100px; }
+        .project-row:nth-child(2) { top: 116px; }
+        .project-row:nth-child(3) { top: 132px; }
+
+        .project-row:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+        }
+
+        .project-row-img {
+            width: 260px;
+            flex-shrink: 0;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Louize', Georgia, serif;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
+            transition: filter 0.25s;
+        }
+
+        .project-row:hover .project-row-img {
+            filter: brightness(1.08);
+        }
+
+        .project-row-body {
+            padding: 2rem 2.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .proj-tag {
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+
+        .proj-title {
+            font-family: 'Louize', Georgia, serif;
+            font-size: 1.35rem;
+            font-weight: 400;
+            letter-spacing: -0.3px;
+            color: var(--text);
+            transition: color 0.2s;
+        }
+
+        .project-row:hover .proj-title { color: var(--accent); }
+
+        .proj-desc {
+            font-size: 0.875rem;
+            color: var(--text-2);
+            line-height: 1.7;
+            max-width: 400px;
+        }
+
+        .proj-links {
+            display: flex;
+            gap: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .proj-link {
+            font-size: 0.8rem;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: opacity 0.2s;
+        }
+
+        .proj-link:hover { opacity: 0.7; }
+        .proj-link svg { width: 11px; height: 11px; }
+
+        /* ── Skills ──────────────────────────────── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .skill-group {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .skill-group:nth-child(odd) { padding-right: 3rem; border-right: 1px solid var(--rule); }
+        .skill-group:nth-child(even) { padding-left: 3rem; }
+        .skill-group:first-child, .skill-group:nth-child(2) { border-top: 1px solid var(--rule); }
+
+        .skill-group-title {
+            font-size: 0.7rem; font-weight: 600; color: var(--text-3);
+            text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.875rem;
+        }
+
+        .skill-items { display: flex; flex-wrap: wrap; gap: 0.375rem 0; }
+
+        .skill-item {
+            font-size: 0.875rem; color: var(--text-2);
+        }
+
+        .skill-item::after { content: '·'; margin: 0 0.5rem; color: var(--text-3); }
+        .skill-item:last-child::after { display: none; }
+        .skill-item.hi { color: var(--accent); }
+
+        /* ── Contact ─────────────────────────── */
+        .contact-section {
+            background: var(--contact-bg);
+            transition: background 0.4s;
+        }
+
+        .contact-section .page {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        .contact-status {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            font-size: 0.8rem;
+            color: var(--text-2);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            flex-shrink: 0;
+            animation: pulse 2s ease-out infinite;
+        }
+
+        @keyframes pulse {
+            0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+            70%  { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+            100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+        }
+
+        .contact-heading {
+            font-family: 'Louize', Georgia, serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 400;
+            letter-spacing: -2px;
+            line-height: 1.05;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .contact-sub {
+            font-size: 0.975rem;
+            color: var(--text-2);
+            margin-bottom: 2.5rem;
+            max-width: 400px;
+            line-height: 1.7;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .contact-link-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+
+        .contact-link-value {
+            font-size: 0.9rem;
+            color: var(--text);
+            transition: color 0.2s;
+        }
+
+        a.contact-link-value:hover { color: var(--accent); }
+
+        /* ── Footer ──────────────────────────────── */
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--rule);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text { font-size: 0.8rem; color: var(--text-3); }
+
+        .footer-accent {
+            font-family: 'Louize', Georgia, serif;
+            font-size: 0.875rem;
+            color: var(--text-3);
+            font-style: italic;
+        }
+
+        /* ── Animations ──────────────────────────── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px) scale(0.97);
+            transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* ── Responsive ──────────────────────────── */
+        @media (max-width: 768px) {
+            .nav-links, .nav-sep { display: none; }
+            .nav-hamburger { display: flex; align-items: center; }
+            .page { padding: 0 1.25rem; }
+
+            .hero {
+                padding: 7rem 0 0;
+                min-height: auto;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                padding: 0 1.5rem;
+            }
+
+            .hero-content {
+                padding-bottom: 3rem;
+                order: 2;
+            }
+
+            .hero-photo {
+                height: auto;
+                padding: 2.5rem 0 0;
+                justify-content: center;
+                order: 1;
+            }
+
+            .hero-photo-frame {
+                width: 160px;
+                height: 220px;
+                border-radius: 999px;
+                overflow: hidden;
+                box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
+            }
+
+            .hero-photo-frame img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center 5%;
+            }
+
+            .hero-name { font-size: clamp(1.9rem, 8vw, 2.75rem); letter-spacing: -2px; }
+            .hero-name br { display: none; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+            .focus-grid { grid-template-columns: 1fr; }
+            .focus-item:nth-child(odd) { padding-right: 0; border-right: none; }
+            .focus-item:nth-child(even) { padding-left: 0; }
+            .focus-item:nth-child(2) { border-top: none; }
+
+            .timeline-item,
+            .pub-entry { grid-template-columns: 1fr; gap: 0.5rem; }
+            .timeline-item::before { display: none; }
+
+            .skills-grid { grid-template-columns: 1fr; }
+            .skill-group:nth-child(odd) { padding-right: 0; border-right: none; }
+            .skill-group:nth-child(even) { padding-left: 0; }
+            .skill-group:nth-child(2) { border-top: none; }
+
+            .project-row { flex-direction: column; }
+            .project-row-img { width: 100%; min-height: 160px; }
+            .project-row-body { padding: 1.5rem; }
+
+            .contact-links { flex-direction: column; gap: 1.5rem; }
+
+            footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <span class="nav-name">Dr.Anaan Hassan</span>
+        <div class="nav-sep"></div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <button class="nav-toggle" id="theme-toggle" aria-label="Toggle theme">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+        </button>
+        <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#about"      onclick="closeMobileMenu()">About</a>
+        <a href="#experience" onclick="closeMobileMenu()">Experience</a>
+        <a href="#projects"   onclick="closeMobileMenu()">Projects</a>
+        <a href="#contact"    onclick="closeMobileMenu()">Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-eyebrow">Medical Officer</div>
+                <h1 class="hero-name">Dr. Anaan <br>Hassan</h1>
+                <p class="hero-tagline">Healing people. <em>Building</em> tools.</p>
+                <p class="hero-bio">Doctor of Medicine passionate about improving healthcare through technology, research, and clinical excellence.</p>
+                <div class="hero-actions">
+                    <a href="#contact" class="hero-cta-secondary">
+                        Get in touch
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-photo">
+                <div class="hero-photo-frame">
+                    <img src="anaan-nobg.png" alt="Dr. Anaan Hassan" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,20 C240,80 480,0 720,40 C960,80 1200,10 1440,50 L1440,80 L0,80 Z" fill="var(--bg)"/>
+        </svg>
+    </div>
+
+    <!-- About -->
+    <div class="page">
+        <section id="about">
+            <div class="sec-header reveal">
+                <span class="sec-label">About</span>
+            </div>
+            <div class="about-grid">
+                <div class="reveal">
+                    <p style="text-align: justify;">
+                    <p>I have always been deeply committed to the field of medicine, with a strong aspiration to contribute to the improvement and development of the Maldivian healthcare sector.</p>
+                    <p>Beyond clinical work, I'm passionate about leveraging technology to solve healthcare challenges — building tools that help medical professionals work more efficiently and improve patient outcomes.</p>
+                </p>
+                    </div>
+                </div>
+                <div class="about-stats reveal">
+                    <div class="stat-row">
+                        <span class="stat-num">1+</span>
+                        <span class="stat-desc">Year of clinical experience</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-num">3</span>
+                        <span class="stat-desc">Healthcare technology projects built</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-num">1</span>
+                        <span class="stat-desc">Peer-reviewed research publication</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <hr class="rule">
+
+    <!-- Focus -->
+    <div class="page">
+        <section id="work">
+            <div class="sec-header reveal">
+                <span class="sec-label">Areas of Focus</span>
+            </div>
+            <div class="focus-grid">
+                <div class="focus-item reveal">
+                    <div class="focus-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/>
+                            <path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/>
+                            <circle cx="20" cy="10" r="2"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="focus-name">Clinical Medicine</div>
+                        <ul class="focus-items">
+                            <li>Patient assessment & diagnosis</li>
+                            <li>Treatment planning</li>
+                            <li>Ward management</li>
+                            <li>Procedural skills</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="focus-item reveal">
+                    <div class="focus-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 19H5c-1 0-2-.9-2-2V7c0-1.1.9-2 2-2h3"/>
+                            <path d="M16 5h3c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2h-3"/>
+                            <rect x="8" y="2" width="8" height="20" rx="1"/>
+                            <path d="M12 8v8M8 12h8"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="focus-name">Emergency Care</div>
+                        <ul class="focus-items">
+                            <li>Emergency response</li>
+                            <li>Acute care management</li>
+                            <li>Trauma protocols</li>
+                            <li>Resuscitation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="focus-item reveal">
+                    <div class="focus-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <path d="M8 21h8M12 17v4"/>
+                            <path d="m9 9 2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="focus-name">Health Technology</div>
+                        <ul class="focus-items">
+                            <li>Clinical tools development</li>
+                            <li>HIS optimization</li>
+                            <li>Medical web applications</li>
+                            <li>AI in healthcare</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="focus-item reveal">
+                    <div class="focus-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 3H5l3 9H5l7 9 7-9h-3L19 3h-4"/>
+                            <path d="M6.5 12h11"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="focus-name">Research</div>
+                        <ul class="focus-items">
+                            <li>Public health studies</li>
+                            <li>Migrant health research</li>
+                            <li>Data analysis</li>
+                            <li>Academic publishing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <hr class="rule">
+
+    <!-- Experience -->
+    <div class="page">
+        <section id="experience">
+            <div class="sec-header reveal">
+                <span class="sec-label">Experience & Education</span>
+            </div>
+            <div class="timeline-list">
+                <div class="timeline-item reveal">
+                    <span class="tl-date">2025</span>
+                    <div>
+                        <div class="tl-role">Medical Intern</div>
+                        <div class="tl-org">Indira Gandhi Memorial Hospital (IGMH) · Malé, Maldives</div>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <span class="tl-date">2020 – 2026</span>
+                    <div>
+                        <div class="tl-role">Volunteer</div>
+                        <div class="tl-org">MMVM</div>
+                        <div class="tl-desc">Providing health education and basic medical assistance to vulnerable migrant communities.</div>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <span class="tl-date">2019 – 2024</span>
+                    <div>
+                        <div class="tl-role">Doctor of Medicine (MD)</div>
+                        <div class="tl-org">MNU School of Medicine · Maldives National University</div>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <span class="tl-date">2011 – 2015</span>
+                    <div>
+                        <div class="tl-role">High School</div>
+                        <div class="tl-org">Al Uthuman EMHS School · Trivandrum, India</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <hr class="rule">
+
+    <!-- Publication -->
+    <div class="page">
+        <section id="publication">
+            <div class="sec-header reveal">
+                <span class="sec-label">Research</span>
+            </div>
+            <a href="https://mnjr.mnu.edu.mv/journal/article/view/179" target="_blank" rel="noopener" class="pub-entry reveal">
+                <div class="pub-year-col">2024</div>
+                <div>
+                    <div class="pub-journal">Maldives National Journal of Research</div>
+                    <div class="pub-title">Socioeconomic Factors Affecting Health Seeking Behaviors of Bangladeshi Migrant Workers Living in Malé, Maldives</div>
+                    <span class="pub-read">
+                        Read Article
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                    </span>
+                </div>
+            </a>
+        </section>
+    </div>
+
+    <hr class="rule">
+
+    <!-- Projects -->
+    <div class="page">
+        <section id="projects">
+            <div class="sec-header reveal">
+                <span class="sec-label">Selected Work</span>
+            </div>
+            <h2 class="sec-title reveal">Projects built for<br>healthcare.</h2>
+            <div class="project-list">
+
+                <div class="project-row reveal">
+                    <div class="project-row-img" style="background: linear-gradient(135deg, #1d4ed8, #3b82f6);"></div>
+                    <div class="project-row-body">
+                        <span class="proj-tag">Education</span>
+                        <div class="proj-title">MMDC Exam Practice Portal</div>
+                        <div class="proj-desc">Online practice portal for MMDC examination preparation, helping medical students study more effectively.</div>
+                        <div class="proj-links">
+                            <a href="https://mmdc-prep.up.railway.app/" target="_blank" rel="noopener" class="proj-link">
+                                Live Demo
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-row reveal">
+                    <div class="project-row-img" style="background: linear-gradient(135deg, #0891b2, #06b6d4);"></div>
+                    <div class="project-row-body">
+                        <span class="proj-tag">Chrome Extension</span>
+                        <div class="proj-title">Hinai Search</div>
+                        <div class="proj-desc">Browser extension that improves navigation of the HINAI Hospital Information System at IGMH.</div>
+                        <div class="proj-links">
+                            <a href="https://chromewebstore.google.com/detail/hinai-search/hdaclhgfmalipinpdaeddnahkcndllhb" target="_blank" rel="noopener" class="proj-link">
+                                Chrome Store
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                            </a>
+                            <a href="https://github.com/AnaanHassan/Hinai-Search" target="_blank" rel="noopener" class="proj-link">
+                                GitHub
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-row reveal">
+                    <div class="project-row-img" style="background: linear-gradient(135deg, #059669, #34d399);"></div>
+                    <div class="project-row-body">
+                        <span class="proj-tag">Clinical Tool</span>
+                        <div class="proj-title">Jaundice Calculator</div>
+                        <div class="proj-desc">Clinical decision support tool for assessing neonatal jaundice risk based on bilirubin levels and age-based thresholds.</div>
+                        <div class="proj-links">
+                            <a href="#" target="_blank" rel="noopener" class="proj-link">
+                                Live Demo
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <hr class="rule">
+
+    <!-- Skills -->
+    <div class="page">
+        <section id="skills">
+            <div class="sec-header reveal">
+                <span class="sec-label">Capabilities</span>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-group reveal">
+                    <div class="skill-group-title">Clinical</div>
+                    <div class="skill-items">
+                        <span class="skill-item">Communication</span>
+                        <span class="skill-item">Critical Thinking</span>
+                        <span class="skill-item">Problem Solving</span>
+                        <span class="skill-item">Team Collaboration</span>
+                    </div>
+                </div>
+                <div class="skill-group reveal">
+                    <div class="skill-group-title">Technology</div>
+                    <div class="skill-items">
+                        <span class="skill-item hi">Hospital Information Systems</span>
+                        <span class="skill-item hi">Web Development</span>
+                        <span class="skill-item hi">Artificial Intelligence</span>
+                        <span class="skill-item hi">Clinical Applications</span>
+                    </div>
+                </div>
+                <div class="skill-group reveal">
+                    <div class="skill-group-title">Tools</div>
+                    <div class="skill-items">
+                        <span class="skill-item">Microsoft Office</span>
+                        <span class="skill-item">G-Suite</span>
+                        <span class="skill-item">Adobe Suite</span>
+                        <span class="skill-item">Video Editing</span>
+                    </div>
+                </div>
+                <div class="skill-group reveal">
+                    <div class="skill-group-title">Languages</div>
+                    <div class="skill-items">
+                        <span class="skill-item">Dhivehi <em style="color:var(--text-3);font-style:normal;font-size:0.75rem">Native</em></span>
+                        <span class="skill-item">English <em style="color:var(--text-3);font-style:normal;font-size:0.75rem">Fluent</em></span>
+                        <span class="skill-item">Hindi <em style="color:var(--text-3);font-style:normal;font-size:0.75rem">Proficient</em></span>
+                        <span class="skill-item">Malayalam <em style="color:var(--text-3);font-style:normal;font-size:0.75rem">Proficient</em></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-section">
+        <div class="page">
+            <section id="contact">
+                <div class="contact-status reveal">
+                    <span class="contact-pulse"></span>
+                    Open to new opportunities
+                </div>
+                <h2 class="contact-heading reveal">Let's work<br>together.</h2>
+                <p class="contact-sub reveal">Open to opportunities and collaborations in healthcare and technology.</p>
+                <div class="contact-links reveal">
+                    <div class="contact-link-item">
+                        <span class="contact-link-label">Email</span>
+                        <a href="mailto:Dr.anaanhassan@gmail.com" class="contact-link-value">Dr.anaanhassan@gmail.com</a>
+                    </div>
+                    <div class="contact-link-item">
+                        <span class="contact-link-label">Phone</span>
+                        <a href="tel:+9609142664" class="contact-link-value">+960 914 2664</a>
+                    </div>
+                    <div class="contact-link-item">
+                        <span class="contact-link-label">GitHub</span>
+                        <a href="https://github.com/AnaanHassan" target="_blank" rel="noopener" class="contact-link-value">AnaanHassan</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="page">
+        <footer>
+            <p class="footer-text">© 2026 Dr.Anaan Hassan</p>
+            <p class="footer-accent">Medicine & Technology</p>
+        </footer>
+    </div>
+
+    <script>
+        // Theme
+        const html = document.documentElement;
+        html.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+
+        // Nav hero style
+        const nav = document.querySelector('.nav');
+        function updateNavStyle() {
+            const heroHeight = document.getElementById('home').offsetHeight;
+            if (window.scrollY < heroHeight - 80) {
+                nav.classList.add('nav-on-hero');
+            } else {
+                nav.classList.remove('nav-on-hero');
+            }
+        }
+        updateNavStyle();
+        window.addEventListener('scroll', updateNavStyle, { passive: true });
+
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        hamburger.addEventListener('click', e => { e.stopPropagation(); mobileMenu.classList.toggle('open'); });
+        function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+        document.addEventListener('click', e => {
+            if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) closeMobileMenu();
+        });
+
+        // Reveal on scroll
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('visible'), i * 60);
+                    revealObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        // Active nav
+        document.querySelectorAll('section[id]').forEach(s => {
+            new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting)
+                        document.querySelectorAll('.nav-links a').forEach(l =>
+                            l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)
+                        );
+                });
+            }, { threshold: 0.3 }).observe(s);
+        });
+    </script>
+</body>
+</html>
